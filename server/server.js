@@ -1,29 +1,12 @@
+const RecipeDao = require('./dao/recipe-dao.js')
+
 const express = require('express')
 const app = express()
 const port = 3000
-const mysql = require('mysql')
-var config = require('./config.json');
-
-
-const connection = mysql.createConnection({
-  host: config.host,
-  user: config.user,
-  password: config.password,
-  database: config.database
-})
-
-connection.connect()
+const dao = new RecipeDao()
 
 app.get('/', (req, res) => {
-
-  connection.query('select * from invoices', function (err, rows, fields) {
-    if (err) {
-      console.log("err")
-      console.log(err.message)
-    }
-
-    console.log('The solution is: ', rows)
-  })
+  console.log(dao.getInvoices())
   res.send('Hello World!')
 })
 
