@@ -5,9 +5,16 @@ const app = express()
 const port = 3000
 const dao = new RecipeDao()
 
-app.get('/', (req, res) => {
-  console.log(dao.getInvoices())
-  res.send('Hello World!')
+app.get('/recipe', (req, res) => {
+  // TODO maybe some error handling for bad requests
+  // TODO dao.getRecipes(req)
+  res.send({
+    recipes: [
+      {name: 'pizza', ingredients: ['cheese', 'dough', 'tomato sauce']},
+      {name: 'ribeye steak', ingredients: ['ribeye steak', 'garlic', 'rosemary', 'butter']},
+      {name: 'chicken adobo', ingredients: ['chicken', 'adobo']}
+    ]
+  })
 })
 
 app.listen(port, () => {
