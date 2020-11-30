@@ -1,0 +1,53 @@
+.Recipe-Page {
+    text-align: left;
+    display: flex;
+    background-color: #282c34;
+    min-height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-left: 20px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.Recipe-Page-header {
+    font-size: calc(30px + 2vmin);
+    color: white;
+}
+
+.Min-to-prepare {
+    font-size: calc(5px + 1vmin);
+    color: white;
+}
+
+.Rating {
+    font-size: calc(5px + 1vmin);
+    color: white;
+}
+
+.Description {
+    font-size: calc(10px + 1vmin);
+    color: white;
+    font-style: italic;
+    width: 40vw;
+}
+
+.Ingredients {
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.Ingredients-list {
+    font-size: calc(10px + 1vmin);
+    margin-top: 10px;
+}
+
+.Steps {
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+.Steps-list {
+    font-size: calc(10px + 1vmin);
+    margin-top: 10px;
+    width: 40vw;
+}
