@@ -1,6 +1,6 @@
 import { React, useState, useRef } from 'react';
 //import logo from './logo.svg'
-//import './App.css';
+import './App.css';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   //} 
 
   return(
-	<>
+	<div className="App">
 		<h1>
 		Recipe Generator
 		</h1>
@@ -30,7 +30,7 @@ function App() {
 		<li>
 			Recipes Found: Stuffing Bites, Mashed Potato Muffins
 		</li>
-	</>
+	</div>
      )
 }
 
