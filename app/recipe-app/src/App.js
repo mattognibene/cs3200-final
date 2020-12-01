@@ -24,11 +24,11 @@ function App() {
 		<input ref={ingRef} type="text" />
 		<button>Enter ingredients</button>
 		<li>
-		Ingredients Entered: Stuffing, Mashed Potatoes, Eggs 
+		Ingredients Entered: Stuffing, Mashed Potatoes, Eggs, Shredded Cheddar 
 		</li>
 		<button>Get recipes</button>
 		<li>
-			Recipes Found: Stuffing Bites
+			Recipes Found: Stuffing Bites, Mashed Potato Muffins
 		</li>
 	</>
      )
