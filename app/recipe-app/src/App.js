@@ -5,7 +5,7 @@ import { React, useState, useRef } from 'react';
 
 function App() {
   //const [ings, setIngs] = useState([])
-  //const ingRef = useRef()
+  const ingRef = useRef()
 
   //function handleIng(e) {
 	//const name = ingRef.current.value
@@ -18,15 +18,18 @@ function App() {
 
   return(
 	<>
-		<h1>Recipe Generator</h1>
-		<input type="text" />
+		<h1>
+		Recipe Generator
+		</h1>
+		<input ref={ingRef} type="text" />
 		<button>Enter ingredients</button>
-		<e1>
-			Ingredients Entered: 
-		</e1>
-		<e2> Stuffing, Mashed Potatoes, Eggs </e2>
-		<button>Get Recipes</button>
-		<e3>Recipes Found: Stuffing Bites</e3>
+		<li>
+		Ingredients Entered: Stuffing, Mashed Potatoes, Eggs 
+		</li>
+		<button>Get recipes</button>
+		<li>
+			Recipes Found: Stuffing Bites
+		</li>
 	</>
      )
 }
