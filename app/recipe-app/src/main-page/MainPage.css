@@ -1,0 +1,33 @@
+.Main-Page {
+    text-align: left;
+    display: flex;
+    background-color: #282c34;
+    min-height: 100vh;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-left: 20px;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: white;
+}
+
+.Main-Page-header {
+    font-size: calc(30px + 2vmin);
+    color: white;
+}
+
+.Sub-Header {
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.Recipes-found {
+    font-size: calc(10px + 1vmin);
+    margin-top: 10px;
+    color: #61dafb;
+}
+
+.Ingredients-list {
+    font-size: calc(10px + 1vmin);
+    margin-top: 10px;
+}
