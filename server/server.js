@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3001
 const mysql = require('mysql')
+const cors = require('cors')
 var config = require('./config.json');
 
 
@@ -13,8 +14,7 @@ const connection = mysql.createConnection({
 })
 
 connection.connect()
-
-app.get('/recipe', (req, res) => {
+app.post('/recipe', cors(), (req, res) => {
 
   connection.query('select * from invoices', function (err, rows, fields) {
     if (err) {

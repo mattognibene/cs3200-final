@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './MainPage.css';
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import RecipePage from "../recipe-page/RecipePage";
+import NetworkModule from "../NetworkModule";
 
 class MainPage extends Component {
     constructor(props) {
@@ -16,9 +17,10 @@ class MainPage extends Component {
         this.setState({ingredients: event.target.value});
     }
 
-    addData(val) {
-        // TODO: hit the API here with the array of ingredients?
-        console.log("val: ", val.split(/\r?\n/));
+    getRecipes(val) {
+        const listOfIngredients = val.split(/\r?\n/);
+        console.log(listOfIngredients)
+        NetworkModule.getRecipes(listOfIngredients).then(r => console.log(r));
     }
 
     render() {
@@ -27,17 +29,9 @@ class MainPage extends Component {
                 <h1 className="Main-Page-header">Recipe Generator</h1>
                 <textarea value={this.state.ingredients} onChange={this.handleChange} rows={10} cols={20} />
                     <p>
-                        <button onClick={() => this.addData(this.state.ingredients)}>
-                            Enter Ingredients </button>
+                        <button onClick={() => this.getRecipes(this.state.ingredients)} >
+                            Get Recipes </button>
                     </p>
-                {/*// we don't really need this part, only for debugging purposes */}
-                <p className="Sub-Header">
-                    Ingredients Entered:
-                </p>
-                <p> {this.state.ingredients} </p>
-                <p>
-                    <button>Get Recipes</button>
-                </p>
                 <p className="Sub-Header">
                     Recipes Found:
                 </p>
