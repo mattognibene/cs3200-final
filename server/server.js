@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3001
 const mysql = require('mysql')
 var config = require('./config.json');
 
@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
 
 connection.connect()
 
-app.get('/', (req, res) => {
+app.get('/recipe', (req, res) => {
 
   connection.query('select * from invoices', function (err, rows, fields) {
     if (err) {
@@ -24,7 +24,23 @@ app.get('/', (req, res) => {
 
     console.log('The solution is: ', rows)
   })
-  res.send('Hello World!')
+
+  const response = {
+    recipes: [
+      {
+        name: "tough mushrooms",
+        ingredients: ["ironshroom", "hylian shroom"],
+        steps: ["put shrooms in pot"]
+      },
+      {
+        name: "shroom kebab",
+        ingredients: ["ironshroom", "hylian shroom", "stamella shroom"],
+        steps: ["put shrooms in pot"]
+      }
+    ]
+  }
+
+  res.send(response)
 })
 
 app.listen(port, () => {
