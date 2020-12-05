@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import './RecipePage.css';
+import {useParams} from "react-router";
 
 class RecipePage extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <div className="Recipe-Page">
                 <header className="Recipe-Page-header">
                     <p>
-                        Stuffing Bites
+                        {this.props.name}
                     </p>
                     <p className="Rating">
                         Rating: 4.3 stars
