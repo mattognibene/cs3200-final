@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './MainPage.css';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import RecipePage from "../recipe-page/RecipePage";
 import NetworkModule from "../NetworkModule";
 
@@ -9,7 +8,8 @@ class MainPage extends Component {
         super(props);
         this.state = {
             ingredients: '',
-            recipes: []
+            recipes: [],
+            selectedRecipe: {}
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -35,9 +35,9 @@ class MainPage extends Component {
     getListItems() {
         const listItems = this.state.recipes.map((recipe) =>
             <li>
-                <Link to="/recipe-page"
-                      className="Recipes-found">
-                    {recipe.name}</Link>
+                <p className="Recipes-found"
+                   onClick={() => this.setState({selectedRecipe: recipe})}>
+                    {recipe.name}</p>
             </li>
         )
         return (
@@ -56,20 +56,17 @@ class MainPage extends Component {
                 <p className="Sub-Header">
                     Recipes Found:
                 </p>
-                <Router>
-                    <div>
-                        <nav>
-                            <ul>
-                                {this.getListItems()}
-                            </ul>
-                        </nav>
-                        <Switch>
-                            <Route path="/recipe-page">
-                                <RecipePage name={"get the recipe that was actually clicked"}/>
-                            </Route>
-                        </Switch>
-                    </div>
-                </Router>
+                <div>
+                    <ul>
+                        {this.getListItems()}
+                    </ul>
+                    <RecipePage name={this.state.selectedRecipe.name}
+                                description={this.state.selectedRecipe.description}
+                                minToPrepare={this.state.selectedRecipe.minToPrepare}
+                                rating={this.state.selectedRecipe.rating}
+                                ingredients={this.state.selectedRecipe.ingredients}
+                                steps={this.state.selectedRecipe.steps}/>
+                </div>
             </div>
         );
     }

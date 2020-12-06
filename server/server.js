@@ -28,14 +28,20 @@ app.post('/recipe', cors(), (req, res) => {
   const response = {
     recipes: [
       {
-        name: "tough mushrooms",
-        ingredients: ["ironshroom", "hylian shroom"],
-        steps: ["put shrooms in pot", "some good shrooms"]
+        name: "Tough Mushrooms",
+        description: "Increases your defense.",
+        minToPrepare: 20,
+        rating: 4.3,
+        ingredients: ["Ironshroom", "Hylian shroom"],
+        steps: ["Put Shrooms in pot", "Some good shrooms"]
       },
       {
-        name: "shroom kebab",
-        ingredients: ["ironshroom", "hylian shroom", "stamella shroom"],
-        steps: ["put shrooms in pot", "i like shrooms"]
+        name: "Shroom Kebab",
+        description: "Restores 3 hearts.",
+        minToPrepare: 30,
+        rating: 3.2,
+        ingredients: ["Ironshroom", "Hylian shroom", "Stamella shroom"],
+        steps: ["Put shrooms in pot", "I like shrooms"]
       }
     ]
   }
