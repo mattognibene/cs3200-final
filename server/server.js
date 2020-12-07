@@ -24,8 +24,8 @@ const getListOfIngredients = (ingredients) => {
 }
 
 connection.connect()
-app.post('/recipes/canmake', cors(), (req, res) => {
-  const query = 'select recipe_id, recipe_name, avg(rating) from recipe '+
+app.post('/recipes/canmake', (req, res) => {
+  const query = 'select recipe_id, recipe_name, avg(rating) as avg_rating from recipe '+
   'left join review using (recipe_id) '+
   'where recipe_id not in '+
   '(select distinct recipe_id from recipe '+
@@ -35,7 +35,7 @@ app.post('/recipes/canmake', cors(), (req, res) => {
   getListOfIngredients(req.body.ingredients) +
   ' or replaced is null) '+
   'group by recipe_id, recipe_name '+
-  'order by avg(rating) desc '+
+  'order by avg_rating desc '+
   'limit 50;'
 
   connection.query( query, function (err, rows, fields) {
@@ -99,24 +99,7 @@ app.get('/recipe/steps', cors(), (req, res) => {
     }
     const steps = rows.map(row => row.step_description)
     res.send({
-      tags: steps
-    })
-  })
-})
-
-app.get('/recipe/steps', cors(), (req, res) => {
-  const query = 'select step_description from recipe '+
-  'join step using (recipe_id) ' +
-  'where recipe_id = ' + req.query.recipe_id + ' ;'
-
-  connection.query( query, function (err, rows, fields) {
-    if (err) {
-      console.log("err")
-      console.log(err.message)
-    }
-    const steps = rows.map(row => row.step_description)
-    res.send({
-      tags: steps
+      steps: steps
     })
   })
 })
