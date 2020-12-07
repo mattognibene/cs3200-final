@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import './MainPage.css';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import RecipePage from "../recipe-page/RecipePage";
+import NetworkModule from "../NetworkModule";
 
 class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ingredients: ''
+            ingredients: '',
+            recipes: [],
+            selectedRecipe: {}
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -16,9 +18,30 @@ class MainPage extends Component {
         this.setState({ingredients: event.target.value});
     }
 
-    addData(val) {
-        // TODO: hit the API here with the array of ingredients?
-        console.log("val: ", val.split(/\r?\n/));
+    getRecipes(val) {
+        const listOfIngredients = val.split(/\r?\n/);
+        const recipeArray = []
+        console.log(listOfIngredients)
+        NetworkModule.getRecipes(listOfIngredients).then(r => {
+            r.recipes.forEach(element => {
+                console.log(element.name)
+                recipeArray.push(element)
+            });
+            console.log(recipeArray)
+            this.setState({recipes: recipeArray})
+        })
+    }
+
+    getListItems() {
+        const listItems = this.state.recipes.map((recipe) =>
+            <li>
+                <p className="Recipes-found"
+                   onClick={() => this.setState({selectedRecipe: recipe})}>
+                    {recipe.name}</p>
+            </li>
+        )
+        return (
+            <ul>{listItems}</ul>);
     }
 
     render() {
@@ -27,37 +50,23 @@ class MainPage extends Component {
                 <h1 className="Main-Page-header">Recipe Generator</h1>
                 <textarea value={this.state.ingredients} onChange={this.handleChange} rows={10} cols={20} />
                     <p>
-                        <button onClick={() => this.addData(this.state.ingredients)}>
-                            Enter Ingredients </button>
+                        <button onClick={() => this.getRecipes(this.state.ingredients)} >
+                            Get Recipes </button>
                     </p>
-                {/*// we don't really need this part, only for debugging purposes */}
-                <p className="Sub-Header">
-                    Ingredients Entered:
-                </p>
-                <p> {this.state.ingredients} </p>
-                <p>
-                    <button>Get Recipes</button>
-                </p>
                 <p className="Sub-Header">
                     Recipes Found:
                 </p>
-                <Router>
-                    <div>
-                        <nav>
-                            <ul>
-                                <li>
-                                    <Link to="/recipe-page"
-                                    className="Recipes-found">Stuffing Bites</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                        <Switch>
-                            <Route path="/recipe-page">
-                                <RecipePage />
-                            </Route>
-                        </Switch>
-                    </div>
-                </Router>
+                <div>
+                    <ul>
+                        {this.getListItems()}
+                    </ul>
+                    <RecipePage name={this.state.selectedRecipe.name}
+                                description={this.state.selectedRecipe.description}
+                                minToPrepare={this.state.selectedRecipe.minToPrepare}
+                                rating={this.state.selectedRecipe.rating}
+                                ingredients={this.state.selectedRecipe.ingredients}
+                                steps={this.state.selectedRecipe.steps}/>
+                </div>
             </div>
         );
     }
