@@ -1,26 +1,65 @@
 import React, {Component} from 'react';
 import './RecipePage.css';
+import NetworkModule from "../NetworkModule";
 
 class RecipePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
 
-    getIngredientsList() {
-        const ingredientsList = this.props.ingredients.map((ingredient) =>
+        }
+    }
+
+    componentDidMount() {
+        this.fetchIngredients()
+        this.fetchSteps()
+        this.fetchTags()
+    }
+
+    getTagsList(tags) {
+        const tagsList = tags.map((tag) =>
+            <li className="Ingredients-list">
+                {tag}
+            </li>
+        )
+        return (<ul>{tagsList}</ul>);
+    }
+
+    fetchTags() {
+        NetworkModule.getRecipeTags(this.props.recipe_id).then(res => {
+            this.setState({tagsList: res.tags})
+        })
+    }
+
+    getIngredientsList(ingredients) {
+        console.log(ingredients)
+        const ingredientsList = ingredients.map((ingredient) =>
             <li className="Ingredients-list">
                 {ingredient}
             </li>
         )
-        return (
-            <ul>{ingredientsList}</ul>);
+        return (<ul>{ingredientsList}</ul>);
     }
 
-    getStepsList() {
-        const stepsList = this.props.steps.map((steps) =>
+    fetchIngredients() {
+        NetworkModule.getRecipeIngredients(this.props.recipe_id).then(res => {
+            this.setState({ingredientsList: res.ingredients})
+        })
+    }
+
+    getStepsList(steps) {
+        const stepsList = steps.map((step) =>
             <li className="Steps-list">
-                {steps}
+                {step}
             </li>
         )
-        return (
-            <ol>{stepsList}</ol>);
+        return (<ol>{stepsList}</ol>);
+    }
+
+    fetchSteps() {
+        NetworkModule.getRecipeSteps(this.props.recipe_id).then(res => {
+            this.setState({stepsList: res.steps})
+        })
     }
 
     getRating() {
@@ -48,17 +87,23 @@ class RecipePage extends Component {
                         {this.props.minToPrepare && this.getMinToPrepare()}
                     </p>
                     <p className="Ingredients">
-                        {this.props.ingredients && "Ingredients"}
+                        {this.props.recipe_id && this.state.ingredientsList && "Ingredients:"}
                     </p>
                     <ul>
-                        {this.props.ingredients && this.getIngredientsList()}
+                        {this.props.recipe_id && this.state.ingredientsList && this.getIngredientsList(this.state.ingredientsList)}
                     </ul>
                     <p className="Steps">
-                        {this.props.steps && "Steps"}
+                        {this.props.recipe_id && this.state.stepsList && "Steps:"}
                     </p>
                     <ol>
-                        {this.props.steps && this.getStepsList()}
+                        {this.props.recipe_id && this.state.stepsList && this.getStepsList(this.state.stepsList)}
                     </ol>
+                    <p className="Ingredients">
+                        {this.props.recipe_id && this.state.tagsList && "Here are the categories this recipe fits under:"}
+                    </p>
+                    <ul>
+                        {this.props.recipe_id && this.state.tagsList && this.getTagsList(this.state.tagsList)}
+                    </ul>
                 </header>
             </div>
         );
