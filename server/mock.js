@@ -102,6 +102,23 @@ app.get('/recipe/steps', cors(), (req, res) => {
   )
 })
 
+app.get('/recipe/nutrition', cors(), (req, res) => {
+  res.send(
+    {
+      "nutrition": [
+          {
+              "calories": 311,
+              "daily_fat_pct": 0,
+              "daily_sugar_pct": 308,
+              "daily_sodium_pct": 0,
+              "daily_protein_pct": 0,
+              "daily_saturated_fat_pct": 0
+          }
+      ]
+  }
+  )
+})
+
 app.listen(port, () => {
   console.log(`Recipe server listening at http://localhost:${port}`)
 })
