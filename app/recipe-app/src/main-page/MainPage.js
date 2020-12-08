@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import './MainPage.css';
 import RecipePage from "../recipe-page/RecipePage";
 import NetworkModule from "../NetworkModule";
-import LoadingMask from "react-loadingmask";
-import "react-loadingmask/dist/react-loadingmask.css";
 
 class MainPage extends Component {
     constructor(props) {

@@ -114,7 +114,7 @@ app.get('/recipe/steps', cors(), (req, res) => {
 app.get('/recipe/nutrition', cors(), (req, res) => {
   res.send(
     {
-      "nutrition": [
+      "nutrition":
           {
               "calories": 311,
               "daily_fat_pct": 0,
@@ -123,7 +123,7 @@ app.get('/recipe/nutrition', cors(), (req, res) => {
               "daily_protein_pct": 0,
               "daily_saturated_fat_pct": 0
           }
-      ]
+
   }
   )
 })

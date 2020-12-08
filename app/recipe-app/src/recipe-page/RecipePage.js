@@ -14,6 +14,26 @@ class RecipePage extends Component {
         this.fetchIngredients()
         this.fetchSteps()
         this.fetchTags()
+        this.fetchNutritionFacts()
+    }
+
+    getNutritionFacts(facts) {
+        return (
+            <ul>
+                <li className="Ingredients-list">{"Calories: " + facts.calories}</li>
+                <li className="Ingredients-list">{"Fats (DV): " + facts.daily_fat_pct + "%"}</li>
+                <li className="Ingredients-list">{"Sugars (DV): " + facts.daily_sugar_pct + "%"}</li>
+                <li className="Ingredients-list">{"Sodium (DV): " + facts.daily_sodium_pct + "%"}</li>
+                <li className="Ingredients-list">{"Protein (DV): " + facts.daily_protein_pct + "%"}</li>
+                <li className="Ingredients-list">{"Saturated Fat (DV): " + facts.daily_saturated_fat_pct + "%"}</li>
+            </ul>
+        )
+    }
+
+    fetchNutritionFacts() {
+        NetworkModule.getNutritionFacts(this.props.recipe_id).then(res => {
+            this.setState({nutritionFacts: res.nutrition})
+        })
     }
 
     getTagsList(tags) {
@@ -86,6 +106,12 @@ class RecipePage extends Component {
                     <p className="Min-to-prepare">
                         {this.props.minToPrepare && this.getMinToPrepare()}
                     </p>
+                    <p className="Ingredients">
+                        {this.props.recipe_id && this.state.nutritionFacts && "Nutrition Facts:"}
+                    </p>
+                    <ul>
+                        {this.props.recipe_id && this.state.nutritionFacts && this.getNutritionFacts(this.state.nutritionFacts)}
+                    </ul>
                     <p className="Ingredients">
                         {this.props.recipe_id && this.state.ingredientsList && "Ingredients:"}
                     </p>

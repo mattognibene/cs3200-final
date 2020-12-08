@@ -37,6 +37,14 @@ const NetworkModule = {
         });
         return response.json();
     },
+
+    getNutritionFacts: async(recipeId={}) => {
+        const response = await fetch("http://localhost:3001/recipe/nutrition?recipeId=" + recipeId.toString(), {
+            method: 'GET'
+        });
+        return response.json();
+    },
+
 }
 
 export default NetworkModule
