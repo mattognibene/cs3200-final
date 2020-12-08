@@ -25,7 +25,7 @@ const getListOfIngredients = (ingredients) => {
 
 connection.connect()
 app.post('/recipes/canmake', (req, res) => {
-  const query = 'select recipe_id, recipe_name, avg(rating) as avg_rating from recipe '+
+  const query = 'select recipe_id, recipe_name, avg(rating) as avg_rating, descrption as description, minutes_to_prepare from recipe '+
   'left join review using (recipe_id) '+
   'where recipe_id not in '+
   '(select distinct recipe_id from recipe '+
