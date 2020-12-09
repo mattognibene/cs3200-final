@@ -17,14 +17,40 @@ app.post('/recipes/canmake', (req, res) => {
         {
             "recipe_id": 137739,
             "recipe_name": "arriba   baked winter squash mexican style",
-            "avg_rating": 5
+            "avg_rating": 5,
+            "minutes_to_prepare": 6,
+            "description": "this shit delicious"
         },
         {
             "recipe_id": 379649,
             "recipe_name": "purple hull peas   heart healthy",
-            "avg_rating": 4
+            "avg_rating": 4,
+            "minutes_to_prepare": 8,
+            "description": "yum yum in my tum tum"
         }
     ]
+    })
+})
+
+// returns all recipes that use the ingredients you have
+app.post('/recipes/haveingredients', (req, res) => {
+    res.send({
+        "recipe_ids": [
+            {
+                "recipe_id": 137739,
+                "recipe_name": "winter mexican style squash whaaaat",
+                "avg_rating": 5,
+                "minutes_to_prepare": 6,
+                "description": "this shit delicious"
+            },
+            {
+                "recipe_id": 379649,
+                "recipe_name": "purple hull peas   heart healthy",
+                "avg_rating": 4,
+                "minutes_to_prepare": 8,
+                "description": "yum yum in my tum tum"
+            }
+        ]
     })
 })
 
@@ -69,23 +95,6 @@ app.get('/recipe/tags', cors(), (req, res) => {
 })
 
 app.get('/recipe/steps', cors(), (req, res) => {
-  const query = 'select step_description from recipe '+
-  'join step using (recipe_id) ' +
-  'where recipe_id = ' + req.query.recipe_id + ' ;'
-
-  connection.query( query, function (err, rows, fields) {
-    if (err) {
-      console.log("err")
-      console.log(err.message)
-    }
-    const steps = rows.map(row => row.step_description)
-    res.send({
-      tags: steps
-    })
-  })
-})
-
-app.get('/recipe/steps', cors(), (req, res) => {
   res.send(
     {
         "steps": [
@@ -105,7 +114,7 @@ app.get('/recipe/steps', cors(), (req, res) => {
 app.get('/recipe/nutrition', cors(), (req, res) => {
   res.send(
     {
-      "nutrition": [
+      "nutrition":
           {
               "calories": 311,
               "daily_fat_pct": 0,
@@ -114,7 +123,7 @@ app.get('/recipe/nutrition', cors(), (req, res) => {
               "daily_protein_pct": 0,
               "daily_saturated_fat_pct": 0
           }
-      ]
+
   }
   )
 })
