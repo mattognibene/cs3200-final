@@ -18,15 +18,15 @@ app.post('/recipes/canmake', (req, res) => {
             "recipe_id": 137739,
             "recipe_name": "arriba   baked winter squash mexican style",
             "avg_rating": 5,
-            "minutes_to_prepare": 6,
-            "description": "this shit delicious"
+            "description": "autumn is my favorite time of year to cook! this recipe can be prepared either spicy or sweet, your choice!two of my posted mexican-inspired seasoning mix recipes are offered as suggestions.",
+            "minutes_to_prepare": 55
         },
         {
             "recipe_id": 379649,
             "recipe_name": "purple hull peas   heart healthy",
             "avg_rating": 4,
-            "minutes_to_prepare": 8,
-            "description": "yum yum in my tum tum"
+            "description": "purple hull peas are a lot like black eyed peas. we buy ours fresh and already shelled from a roadside farm stand in east texas.  we keep them in a cooler for our four hour trip back home. i put them in the fridge and make this asap usually the next day. i got this recipe from purplehull.com. but i use half the sugar and half the salt that the original had. we love the healthier version and hope you will too.",
+            "minutes_to_prepare": 105
         }
     ]
     })
@@ -38,20 +38,20 @@ app.post('/recipes/haveingredients', (req, res) => {
         "recipe_ids": [
             {
                 "recipe_id": 137739,
-                "recipe_name": "winter mexican style squash whaaaat",
+                "recipe_name": "arriba   baked winter squash mexican style",
                 "avg_rating": 5,
-                "minutes_to_prepare": 6,
-                "description": "this shit delicious"
+                "description": "autumn is my favorite time of year to cook! this recipe can be prepared either spicy or sweet, your choice!two of my posted mexican-inspired seasoning mix recipes are offered as suggestions.",
+                "minutes_to_prepare": 55
             },
             {
                 "recipe_id": 379649,
                 "recipe_name": "purple hull peas   heart healthy",
                 "avg_rating": 4,
-                "minutes_to_prepare": 8,
-                "description": "yum yum in my tum tum"
+                "description": "purple hull peas are a lot like black eyed peas. we buy ours fresh and already shelled from a roadside farm stand in east texas.  we keep them in a cooler for our four hour trip back home. i put them in the fridge and make this asap usually the next day. i got this recipe from purplehull.com. but i use half the sugar and half the salt that the original had. we love the healthier version and hope you will too.",
+                "minutes_to_prepare": 105
             }
         ]
-    })
+        })
 })
 
 

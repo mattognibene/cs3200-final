@@ -20,16 +20,14 @@ class MainPage extends Component {
 
     getRecipesCanMake(val) {
         const listOfIngredients = val.split(/\r?\n/);
-        console.log(listOfIngredients)
-        NetworkModule.getRecipesCanMake(listOfIngredients).then(r => {
+        NetworkModule.getRecipesCanMake({ingredients: listOfIngredients}).then(r => {
             this.setState({recipes: r.recipe_ids})
         })
     }
 
     getRecipesHaveIngredients(val) {
         const listOfIngredients = val.split(/\r?\n/);
-        console.log(listOfIngredients)
-        NetworkModule.getRecipesHaveIngredients(listOfIngredients).then(r => {
+        NetworkModule.getRecipesHaveIngredients({ingredients: listOfIngredients}).then(r => {
             this.setState({recipes: r.recipe_ids})
         })
     }

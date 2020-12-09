@@ -62,6 +62,7 @@ class RecipePage extends Component {
     }
 
     fetchIngredients() {
+        console.log("fetch ingredients")
         NetworkModule.getRecipeIngredients(this.props.recipe_id).then(res => {
             this.setState({ingredientsList: res.ingredients})
         })
