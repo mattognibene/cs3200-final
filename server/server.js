@@ -48,7 +48,6 @@ app.post('/recipes/hasingredients', (req, res) => {
 })
 
 app.post('/recipes/canmake', (req, res) => {
-  console.log(getRegexListOfIngredients(req.body.ingredients))
   const query = 'select recipe_id, recipe_name, avg(rating) as avg_rating, descrption as description, minutes_to_prepare from recipe '+
   'left join review using (recipe_id) '+
   'where recipe_id not in '+
@@ -75,11 +74,10 @@ app.post('/recipes/canmake', (req, res) => {
 
 
 app.get('/recipe/ingredients', cors(), (req, res) => {
-  console.log("getting ingredients")
   const query = 'select ingredient_name from recipe '+
   'join recipe_has_ingredient using (recipe_id) ' +
   'join ingredient using (ingredient_id) ' +
-  'where recipe_id = ' + req.query.recipe_id + ' ;'
+  'where recipe_id = ' + req.query.recipeId + ' ;'
 
   connection.query( query, function (err, rows, fields) {
     if (err) {
@@ -97,7 +95,7 @@ app.get('/recipe/tags', cors(), (req, res) => {
   const query = 'select tag_name from recipe '+
   'join recipe_has_tag using (recipe_id) ' +
   'join tag using (tag_id) ' +
-  'where recipe_id = ' + req.query.recipe_id + ' ;'
+  'where recipe_id = ' + req.query.recipeId + ' ;'
 
   connection.query( query, function (err, rows, fields) {
     if (err) {
@@ -114,7 +112,7 @@ app.get('/recipe/tags', cors(), (req, res) => {
 app.get('/recipe/steps', (req, res) => {
   const query = 'select step_description from recipe '+
   'join step using (recipe_id) ' +
-  'where recipe_id = ' + req.query.recipe_id + 
+  'where recipe_id = ' + req.query.recipeId + 
   ' order by step_id ;'
 
   connection.query( query, function (err, rows, fields) {
@@ -133,7 +131,7 @@ app.get('/recipe/nutrition', (req, res) => {
   const query = 'select calories, daily_fat_pct, daily_sugar_pct, daily_sodium_pct, daily_protein_pct, daily_saturated_fat_pct ' +
   'from recipe ' + 
   'join nutrition using (nutrition_id) ' +
-  'where recipe_id = ' + req.query.recipe_id + ' ;'
+  'where recipe_id = ' + req.query.recipeId + ' ;'
 
   connection.query( query, function (err, rows, fields) {
     if (err) {

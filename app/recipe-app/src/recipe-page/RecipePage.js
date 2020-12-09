@@ -32,7 +32,7 @@ class RecipePage extends Component {
 
     fetchNutritionFacts() {
         NetworkModule.getNutritionFacts(this.props.recipe_id).then(res => {
-            this.setState({nutritionFacts: res.nutrition})
+            this.setState({nutritionFacts: res.nutrition[0]})
         })
     }
 

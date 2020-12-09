@@ -74,11 +74,11 @@ class MainPage extends Component {
                         <ul>
                             {this.getListItems()}
                         </ul>
-                        <RecipePage recipe_id={this.state.selectedRecipe.recipe_id}
+                        {this.state.selectedRecipe.recipe_id && <RecipePage recipe_id={this.state.selectedRecipe.recipe_id}
                                     name={this.state.selectedRecipe.recipe_name}
                                     description={this.state.selectedRecipe.description}
                                     minToPrepare={this.state.selectedRecipe.minutes_to_prepare}
-                                    rating={this.state.selectedRecipe.avg_rating} />
+                                    rating={this.state.selectedRecipe.avg_rating} />}
                     </div>
                 </div>
             </div>
